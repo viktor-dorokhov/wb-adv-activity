@@ -1,0 +1,30 @@
+{
+  "name": "wb-adv-activity",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/viktor-dorokhov/wb-adv-activity.git"
+  },
+  "author": "Viktor Dorokhov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/viktor-dorokhov/wb-adv-activity/issues"
+  },
+  "homepage": "https://github.com/viktor-dorokhov/wb-adv-activity#readme",
+  "dependencies": {
+    "axios": "^1.7.7",
+    "date-fns": "^3.6.0",
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}
