@@ -9,7 +9,7 @@ const apiUrl = 'https://advert-api.wildberries.ru/adv/v0/';
 // пока только одна кампания
 const campaignId = process.env.CAMPAIGN_IDS;
 // пока только одно время и только старт
-let timeStart = process.env.TIME_START;
+const timeStart = process.env.TIME_START;
 // const timePause = process.env.TIME_PAUSE;
 let globalTimer;
 let started = false;
@@ -33,7 +33,6 @@ const campaignAction = async (id, action) => {
   }
 };
 
-timeStart = '23:23';
 const app = async () => {
   globalTimer = setInterval(async () => {
     const now = new Date(); 
@@ -41,7 +40,7 @@ const app = async () => {
     if (!started && now > dateStart) { //  && now - dateStart < (60 * 1000 * 60) // для запуска до 12 ночи
       await campaignAction(campaignId, 'start');
     }
-  }, 1000);
+  }, 60 * 1000);
 };
 
 await app();
