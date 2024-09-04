@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import axios from 'axios';
-import { format as formatDate, parse as parseDate, differenceInCalendarDays } from 'date-fns';
+import { format as formatDate, parse as parseDate } from 'date-fns';
 
 const WB_API_KEY_ADV = process.env.WB_API_KEY_ADV;
 const apiUrl = 'https://advert-api.wildberries.ru/adv/v0/';
@@ -19,28 +19,30 @@ const campaignAction = async (id, action) => {
   try {
     const response = await axios({
       method: 'get',
-      url: `${apiUrl}${action}?id=${id}`,
+      url: `${apiUrl}${action}?id=${id}1`,
       responseType: 'json',
       headers: { 'Authorization': WB_API_KEY_ADV },
     });
     started = true;
-    console.log(`[${formatDate(now, 'dd.LL.yyyy hh:mm:ss')}]: Кампания успешно запущена!`);
-    // process.exit(0);
+    console.log(`[${formatDate(now, 'dd.LL.yyyy HH:mm:ss')}]: Кампания успешно запущена!`);
   } catch (err) {
-    console.log(err);
-    // console.log(err.response.status);
-    console.log(`[${formatDate(now, 'dd.LL.yyyy hh:mm:ss')}]: Запрос к API WB завершился с ошибкой`);
+    // console.log(err);
+    console.log(`[${formatDate(now, 'dd.LL.yyyy HH:mm:ss')}]: Запрос к API WB завершился с ошибкой`);
+    console.log(`Код ответа:${err.response.status}`);
+    console.log(`Текст ошибки:${err.response.data.error}`);
+    // process.exit(0);
   }
 };
 
 const app = async () => {
+  console.log('Приложение изменения активности WB кампаний запущено!');
   globalTimer = setInterval(async () => {
     const now = new Date(); 
     const dateStart = parseDate(`${formatDate(now, 'dd.LL.yyyy')} ${timeStart}`, 'dd.LL.yyyy HH:mm', now);
-    if (!started && now > dateStart) { //  && now - dateStart < (60 * 1000 * 60) // для запуска до 12 ночи
+    if (!started && now > dateStart && (now - dateStart) < (1000 * 60 * 60)) {
       await campaignAction(campaignId, 'start');
     }
-  }, 60 * 1000);
+  }, 60* 1000);
 };
 
 await app();
