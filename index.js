@@ -25,7 +25,7 @@ const campaignAction = async (id, action) => {
     });
     started = true;
     console.log(`[${formatDate(now, 'dd.LL.yyyy hh:mm:ss')}]: Кампания успешно запущена!`);
-    process.exit(0);
+    // process.exit(0);
   } catch (err) {
     console.log(err);
     // console.log(err.response.status);
