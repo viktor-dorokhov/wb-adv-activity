@@ -19,7 +19,7 @@ const campaignAction = async (id, action) => {
   try {
     const response = await axios({
       method: 'get',
-      url: `${apiUrl}${action}?id=${id}1`,
+      url: `${apiUrl}${action}?id=${id}`,
       responseType: 'json',
       headers: { 'Authorization': WB_API_KEY_ADV },
     });
